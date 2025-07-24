@@ -1,0 +1,35 @@
+# Python 기본
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# 가상환경
+blip2_env/
+venv/
+env/
+
+# 프로젝트 특화
+temp_splits/
+temp_chunks/
+output/
+logs/
+pdf_files/
+pdf_files_o/
+image_png/
+ex_embed/
+
+# 임시 파일
+*.tmp
+*.temp
+*.log
+
+# OS 파일
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

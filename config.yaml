@@ -1,0 +1,74 @@
+# NXJ_Parser 설정 파일
+# PDF 파서 파이프라인 설정
+
+# 경로 설정
+paths:
+  pdf_input: "pdf_files"  # 입력 PDF 디렉토리
+  pdf_input_other: "pdf_files_o"  # 기타 PDF 디렉토리
+  output: "output"  # 결과 JSON 저장 디렉토리
+  image_output: "image_png"  # 이미지 블록 crop 결과 저장
+  logs: "logs"  # 로그 파일 저장
+
+# OCR 설정
+ocr:
+  language: "kor+eng"  # pytesseract 언어 설정 (한국어 + 영어)
+  tesseract_config: "--psm 6"  # tesseract page segmentation mode
+
+# Marker 설정
+marker:
+  max_pages: null  # 최대 페이지 수 제한 (null = 제한 없음)
+  ocr_fallback: true  # 디지털 텍스트 추출 실패 시 OCR 사용
+  extract_images: true  # 이미지 블록 추출 활성화
+
+# GMFT 설정
+gmft:
+  detect_tables: true  # 표 감지 활성화
+  confidence_threshold: 0.5  # 표 감지 신뢰도 임계값
+  output_formats: ["markdown", "json"]  # 출력 형식
+
+# 병렬 처리 설정
+parallel:
+  max_workers: 2  # 최대 프로세스 수 (안정성을 위해 줄임)
+  chunk_size: 10  # 한 번에 처리할 PDF 개수
+  default_sequential: true  # 기본값: 순차 처리 (GPU 메모리 안정성)
+
+# PDF 페이지 분할 처리 설정 (물리적 분할)
+pdf_split_processing:
+  enabled: true
+  pages_per_split: 15  # 기본 페이지 분할 크기
+  temp_directory: "temp_splits"
+  adaptive_split_size: true  # 파일 크기에 따른 자동 조정
+  keep_temp_files: true   # 임시 파일 보관 여부 (확인용)
+
+# RAG용 텍스트 토큰 청크 분할 설정
+text_chunking:
+  enabled: true
+  chunk_size: 500        # 청크당 토큰 수
+  overlap: 50           # 청크 간 오버랩 토큰 수
+  model_name: "gpt-3.5-turbo"  # 토큰 계산 기준 모델
+
+# 🖼️ BLIP-2 이미지 캡션 생성 설정 (RTX 5090 24GB 최적화)
+image_captioning:
+  enabled: true
+  # 🔥 RTX 5090 24GB 전용 - 최고 품질 모델 사용 가능
+  model: 'Salesforce/blip2-opt-6.7b'   # 6.7B 모델 (10GB, 최고 품질) 
+  # model: 'Salesforce/blip2-opt-2.7b' # 기본값 (5.4GB, 고품질)
+  # model: 'Salesforce/blip2-flan-t5-xl' # 경량화 (3GB, 빠름)
+  
+  # 캐시 디렉토리 (기본: ~/.cache/huggingface/hub/)
+  # cache_dir: '/path/to/custom/cache' # 사용자 정의 캐시 위치
+  
+  # 생성 설정
+  max_length: 75          # RTX 5090이면 더 긴 캡션 가능
+  temperature: 0.8        # 생성 다양성 (창의적 설명)
+  
+  # RTX 5090 24GB 최적화 설정
+  use_fp16: true          # FP16 사용 (여전히 메모리 절약)
+  device_map: "auto"      # 자동 디바이스 배치
+  batch_size: 4           # RTX 5090이면 배치 처리 가능
+  compile_model: true     # PyTorch 2.0+ 컴파일 최적화
+
+# 로깅 설정
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s" 

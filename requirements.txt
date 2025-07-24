@@ -1,0 +1,39 @@
+# NXJ_Parser 의존성 패키지
+# Marker + GMFT 기반 PDF 파서 파이프라인
+
+# 코어 PDF 처리
+marker-pdf>=1.8.0
+gmft>=0.1.0
+
+# PDF 및 이미지 처리
+PyMuPDF>=1.23.0
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# OCR
+pytesseract>=0.3.10
+
+# 데이터 처리
+pandas>=2.0.0
+numpy>=1.24.0
+
+# 설정 및 유틸리티
+PyYAML>=6.0
+tqdm>=4.65.0
+
+# 로깅 및 병렬 처리 (내장 모듈 사용)
+# concurrent.futures (내장)
+# multiprocessing (내장)
+# logging (내장)
+
+# 선택적 패키지 (성능 향상용)
+# 병렬 처리 성능 향상
+psutil>=5.9.0
+
+# JSON 처리 성능 향상 (선택사항)
+# orjson>=3.9.0  # 더 빠른 JSON 처리가 필요한 경우
+
+# 개발 및 테스트용 (선택사항)
+# pytest>=7.0.0
+# black>=23.0.0
+# flake8>=6.0.0 
