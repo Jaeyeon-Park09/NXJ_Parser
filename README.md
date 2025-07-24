@@ -4,7 +4,7 @@
 
 ## 📋 개요
 
-NXJ_Parser는 PDF 문서를 **텍스트**, **이미지**, **표**로 분리하여 RAG(Retrieval-Augmented Generation) 시스템에 최적화된 멀티모달 데이터로 변환하는 고급 파싱 파이프라인입니다.
+NXJ_Parser는 PDF 문서를 **텍스트**, **이미지**, **표**로 분리하여 RAG(Retrieval-Augmented Generation) 시스템에 최적화된 멀티모달 데이터로 변환하는 파싱 파이프라인입니다.
 
 ### 🎯 핵심 기능
 
